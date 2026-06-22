@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>chocho — Portfolio</title>
+  <style>
+    @font-face { font-family: 'SFMono'; src: url('SFMonoLight.otf') format('opentype'); }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg:#f6f6f4; --white:#fff; --border:#e2e2df; --text:#1a1a1a; --mid:#888; --muted:#bbb; --f:'SFMono','Courier New',monospace; }
+    html, body { font-family:var(--f); font-size:13px; line-height:1.6; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; }
+    nav { position:sticky; top:0; z-index:50; background:var(--white); border-bottom:1px solid var(--border); padding:18px 40px; display:flex; justify-content:space-between; align-items:baseline; }
+    nav .n-name { font-weight:600; }
+    nav .n-right { color:var(--mid); }
+    .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; }
+    .ix-layout { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; }
+    .ix-name { padding-right:40px; }
+    .ix-name .n-title { font-weight:600; }
+    .ix-name .n-sub { font-style:italic; color:var(--mid); margin-bottom:20px; }
+    .ix-name .n-domain { color:var(--mid); }
+    .ix-section { padding-right:40px; }
+    .ix-sh { margin-bottom:72px; }
+    .ix-sh .roman { color:var(--mid); margin-bottom:8px; }
+    .ix-sh .s-name { font-weight:600; }
+    .ix-entry { margin-bottom:22px; }
+    .ix-entry .e-n { font-weight:600; margin-bottom:2px; }
+    .ix-entry .e-title { line-height:1.45; }
+    .ix-entry .e-sub { color:var(--mid); }
+    .project { background:var(--white); border-bottom:1px solid var(--border); }
+    .proj-row { display:grid; grid-template-columns:200px 280px 1fr; min-height:380px; }
+    .pc-title { padding:40px; border-right:1px solid var(--border); }
+    .pc-title .p-num { color:var(--mid); margin-bottom:8px; }
+    .pc-title .p-name { font-weight:600; }
+    .pc-text { padding:40px; border-right:1px solid var(--border); }
+    .pc-text .meta { color:var(--mid); margin-bottom:24px; }
+    .pc-text .meta p { line-height:1.8; }
+    .pc-text .lead { font-style:italic; margin-bottom:16px; }
+    .pc-text .body { margin-bottom:24px; }
+    .pc-text .idx { color:var(--mid); }
+    .pc-media { padding:40px; background:var(--bg); }
+    .m-grid { display:grid; gap:6px; }
+    .m-grid img, .m-grid video { width:100%; display:block; aspect-ratio:16/9; object-fit:cover; background:var(--border); }
+    .img-item.wide, .vid-item.wide { grid-column:1/-1; }
+    .m-cap { margin-top:8px; color:var(--mid); }
+    .ph { aspect-ratio:4/3; background:#eeeeed; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; }
+    footer { padding:28px 40px; display:flex; justify-content:space-between; color:var(--mid); background:var(--white); border-top:1px solid var(--border); }
+    @media (max-width:960px) {
+      nav,.index,.pc-title,.pc-text,.pc-media,footer { padding-left:20px; padding-right:20px; }
+      .proj-row { grid-template-columns:1fr; }
+      .pc-title,.pc-text { border-right:none; border-bottom:1px solid var(--border); }
+      .ix-layout { grid-template-columns:1fr; gap:40px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <span class="n-name">chocho</span>
+  <span class="n-right">Portfolio 2025</span>
+</nav>
+
+<section class="index">
+  <div class="ix-layout">
+    <div class="ix-name">
+      <div class="n-title">chocho</div>
+      <div class="n-sub">Freewriter</div>
+      <div class="n-domain">www.chochowork.com</div>
+    </div>
+
+    <div class="ix-section">
+      <div class="ix-sh">
+        <div class="roman">I</div>
+        <div class="s-name">Copywriting</div>
+      </div>
+      <div class="ix-entry">
+        <div class="e-n">1</div>
+        <div class="e-title">K8</div>
+        <div class="e-sub"></div>
+      </div>
+      <div class="ix-entry">
+        <div class="e-n">2</div>
+        <div class="e-title">아이오닉6</div>
+        <div class="e-sub"></div>
+      </div>
+      <div class="ix-entry">
+        <div class="e-n">3</div>
+        <div class="e-title">카카오페이지</div>
+        <div class="e-sub"></div>
+      </div>
+      <div class="ix-entry">
+        <div class="e-n">4</div>
+        <div class="e-title">현대카드</div>
+        <div class="e-sub"></div>
+      </div>
+    </div>
+
+    <div class="ix-section">
+      <div class="ix-sh">
+        <div class="roman">II</div>
+        <div class="s-name">IP Brand marketing</div>
+      </div>
+      <div class="ix-entry">
+        <div class="e-n">5</div>
+        <div class="e-title">공간브랜딩_강남구</div>
+        <div class="e-sub"></div>
+      </div>
+      <div class="ix-entry">
+        <div class="e-n">6</div>
+        <div class="e-title">공간브랜딩_서울시</div>
+        <div class="e-sub"></div>
+      </div>
+    </div>
+
+    <div class="ix-section">
+      <div class="ix-sh">
+        <div class="roman">III</div>
+        <div class="s-name">Product BrandMarketing</div>
+      </div>
+      <div class="ix-entry">
+        <div class="e-n">7</div>
+        <div class="e-title">쬬르디만들기</div>
+        <div class="e-sub"></div>
+      </div>
+      <div class="ix-entry">
+        <div class="e-n">8</div>
+        <div class="e-title">카카오 캠페인</div>
+        <div class="e-sub"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="project">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">01</div>
+      <div class="p-name">K8</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">001</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="ph">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">02</div>
+      <div class="p-name">아이오닉6</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">002</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="img-item">
+          <img src="Copywriting/아이오닉6/스크린샷 2026-06-22 오후 2.10.16.png" alt="스크린샷 2026-06-22 오후 2.10.16.png" loading="lazy" />
+          <div class="m-cap">1<br>스크린샷 2026-06-22 오후 2.10.16.png</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">03</div>
+      <div class="p-name">카카오페이지</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">003</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="ph">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">04</div>
+      <div class="p-name">현대카드</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">004</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="ph">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">05</div>
+      <div class="p-name">공간브랜딩_강남구</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">005</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="ph">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">06</div>
+      <div class="p-name">공간브랜딩_서울시</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">006</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="ph">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">07</div>
+      <div class="p-name">쬬르디만들기</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">007</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="ph">—</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="project">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">08</div>
+      <div class="p-name">카카오 캠페인</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">008</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="vid-item wide">
+          <video src="Product BrandMarketing/카카오 캠페인/250924 카카오_MAIN_GPT_역자막_alt_확인용.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="m-cap">1<br>250924 카카오_MAIN_GPT_역자막_alt_확인용.mp4</div>
+        </div>
+        <div class="vid-item wide">
+          <video src="Product BrandMarketing/카카오 캠페인/250925 카카오_메인 20초_옥외, 디지털.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="m-cap">2<br>250925 카카오_메인 20초_옥외, 디지털.mp4</div>
+        </div>
+        <div class="vid-item wide">
+          <video src="Product BrandMarketing/카카오 캠페인/250925 카카오_메인 30초_옥외, 디지털.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="m-cap">3<br>250925 카카오_메인 30초_옥외, 디지털.mp4</div>
+        </div>
+        <div class="vid-item wide">
+          <video src="Product BrandMarketing/카카오 캠페인/250925 카카오_숏폼03_친구탭피드_최종고화질.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="m-cap">4<br>250925 카카오_숏폼03_친구탭피드_최종고화질.mp4</div>
+        </div>
+        <div class="vid-item wide">
+          <video src="Product BrandMarketing/카카오 캠페인/250925 카카오_숏폼05_메시지삭제_최종고화질.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="m-cap">5<br>250925 카카오_숏폼05_메시지삭제_최종고화질.mp4</div>
+        </div>
+        <div class="vid-item wide">
+          <video src="Product BrandMarketing/카카오 캠페인/250925 카카오_숏폼08_공개범위_최종고화질.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="m-cap">6<br>250925 카카오_숏폼08_공개범위_최종고화질.mp4</div>
+        </div>
+        <div class="vid-item wide">
+          <video src="Product BrandMarketing/카카오 캠페인/250925 카카오_숏폼10_GPT_최종고화질.mp4" autoplay muted loop playsinline preload="metadata"></video>
+          <div class="m-cap">7<br>250925 카카오_숏폼10_GPT_최종고화질.mp4</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Portfolio 2025</span>
+  <span>www.chochowork.com</span>
+</footer>
+
+</body>
+</html>

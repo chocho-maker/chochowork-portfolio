@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kakao Brand Campaign 2025</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0b120d;
+      --surface: #0f1a10;
+      --border: #1e3322;
+      --muted: #3a6644;
+      --mid: #6aad7a;
+      --text: #c8e0cc;
+      --white: #e8f5eb;
+      --accent: #4cdf7a;
+      --sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 24px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(14,14,14,0.9);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .logo {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    nav .nav-right {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    nav .nav-right span {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 120px 40px 80px;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero-index {
+      position: absolute;
+      top: 120px;
+      right: 40px;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .hero h1 {
+      font-size: clamp(56px, 9vw, 130px);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--white);
+      margin-bottom: 60px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-top: 1px solid var(--border);
+      padding-top: 28px;
+    }
+
+    .hero-meta .cell {
+      padding-right: 20px;
+    }
+
+    .hero-meta .cell:not(:last-child) {
+      border-right: 1px solid var(--border);
+      margin-right: 20px;
+    }
+
+    .hero-meta .cell .label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .hero-meta .cell .val {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      line-height: 1.5;
+    }
+
+    /* ── INTRO ── */
+    .intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .intro .intro-left {
+      padding: 80px 40px;
+      border-right: 1px solid var(--border);
+    }
+
+    .intro .intro-left p {
+      font-size: clamp(16px, 1.8vw, 22px);
+      line-height: 1.7;
+      color: var(--text);
+      font-weight: 300;
+    }
+
+    .intro .intro-right {
+      padding: 80px 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .intro .intro-right .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .intro .intro-right .tag {
+      display: inline-block;
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--mid);
+      border-radius: 2px;
+    }
+
+    .intro .intro-right .scroll-hint {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      padding: 40px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .section-label .s-title {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .section-label .s-count {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ── VIDEO FULL ── */
+    .video-full {
+      border-bottom: 1px solid var(--border);
+      background: #000;
+      position: relative;
+    }
+
+    .video-full video {
+      width: 100%;
+      display: block;
+      max-height: 90vh;
+      object-fit: contain;
+      background: #000;
+    }
+
+    .video-info {
+      padding: 28px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+
+    .video-info .v-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    .video-info .v-sub {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── STATEMENT ── */
+    .statement {
+      padding: 120px 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .statement p {
+      font-size: clamp(28px, 4.5vw, 60px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      text-transform: uppercase;
+      max-width: 1000px;
+    }
+
+    .statement p .dim {
+      color: var(--accent);
+    }
+
+    /* ── SHORTFORM GRID ── */
+    .shortform-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .sf-item {
+      border-right: 1px solid var(--border);
+    }
+
+    .sf-item:last-child {
+      border-right: none;
+    }
+
+    .sf-item video {
+      width: 100%;
+      display: block;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+      background: #000;
+    }
+
+    .sf-item .sf-info {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .sf-item .sf-num {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .sf-item .sf-name {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+    }
+
+    /* ── AI FILM ── */
+    .ai-section {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ai-header {
+      padding: 80px 40px 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .ai-header h2 {
+      font-size: clamp(36px, 5vw, 68px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+
+    .ai-header .ai-desc {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .ai-header .ai-desc p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--mid);
+      font-weight: 300;
+    }
+
+    /* ── CREDITS ── */
+    .credits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .credit-col {
+      padding: 60px 40px;
+      border-right: 1px solid var(--border);
+    }
+
+    .credit-col:last-child {
+      border-right: none;
+    }
+
+    .credit-col .c-label {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .credit-col ul {
+      list-style: none;
+    }
+
+    .credit-col ul li {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 2.2;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .credit-col ul li:last-child {
+      border-bottom: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 32px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer .f-left {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    footer .f-right {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      nav { padding: 18px 20px; }
+      .hero { padding: 100px 20px 60px; }
+      .hero-index { right: 20px; }
+      .hero h1 { font-size: clamp(40px, 10vw, 80px); }
+      .hero-meta { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+      .hero-meta .cell:not(:last-child) { border-right: none; margin-right: 0; }
+      .intro { grid-template-columns: 1fr; }
+      .intro .intro-left { border-right: none; border-bottom: 1px solid var(--border); padding: 48px 20px; }
+      .intro .intro-right { padding: 48px 20px; }
+      .section-label { padding: 28px 20px; }
+      .video-info { padding: 20px; }
+      .statement { padding: 60px 20px; }
+      .shortform-grid { grid-template-columns: repeat(2, 1fr); }
+      .sf-item:nth-child(2) { border-right: none; }
+      .ai-header { grid-template-columns: 1fr; gap: 20px; padding: 48px 20px 32px; }
+      .credits { grid-template-columns: 1fr; }
+      .credit-col { border-right: none; border-bottom: 1px solid var(--border); padding: 40px 20px; }
+      .credit-col:last-child { border-bottom: none; }
+      footer { padding: 24px 20px; flex-direction: column; gap: 8px; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Work</a>
+    <div class="nav-right">
+      <span>Product &amp; Brand</span>
+      <span>2025</span>
+    </div>
+  </nav>
+
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-index">03 / Brand Marketing</div>
+
+    <h1>
+      Kakao<br>
+      <em>Brand</em><br>
+      Campaign
+    </h1>
+
+    <div class="hero-meta">
+      <div class="cell">
+        <div class="label">Client</div>
+        <div class="val">Kakao Corp.</div>
+      </div>
+      <div class="cell">
+        <div class="label">Year</div>
+        <div class="val">2025</div>
+      </div>
+      <div class="cell">
+        <div class="label">Deliverables</div>
+        <div class="val">Brand Film<br>Shortform ×4</div>
+      </div>
+      <div class="cell">
+        <div class="label">Medium</div>
+        <div class="val">OOH<br>Digital</div>
+      </div>
+      <div class="cell">
+        <div class="label">Feature</div>
+        <div class="val">AI × KakaoTalk</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- INTRO -->
+  <div class="intro">
+    <div class="intro-left">
+      <p>
+        카카오는 3,000만 일상의 공간입니다.<br><br>
+        AI와 카카오가 만나는 순간을 브랜드의 언어로 풀어낸 캠페인. 메인 필름부터 숏폼까지, 연결의 감각을 새롭게 정의했습니다.
+      </p>
+    </div>
+    <div class="intro-right">
+      <div class="tag-list">
+        <span class="tag">Brand Direction</span>
+        <span class="tag">Creative Strategy</span>
+        <span class="tag">Film Production</span>
+        <span class="tag">Social Content</span>
+        <span class="tag">AI Feature</span>
+        <span class="tag">OOH</span>
+      </div>
+      <span class="scroll-hint">↓ Scroll</span>
+    </div>
+  </div>
+
+
+  <!-- MAIN FILM 30s -->
+  <div class="section-label">
+    <span class="s-title">Main Film</span>
+    <span class="s-count">30s — OOH &amp; Digital</span>
+  </div>
+
+  <div class="video-full">
+    <video
+      src="250925 카카오_메인 30초_옥외, 디지털.mp4"
+      controls
+      preload="metadata"
+    ></video>
+    <div class="video-info">
+      <span class="v-title">카카오 메인 필름 30초</span>
+      <span class="v-sub">Outdoor · Digital Display</span>
+    </div>
+  </div>
+
+
+  <!-- MAIN FILM 20s -->
+  <div class="section-label">
+    <span class="s-title">Main Film</span>
+    <span class="s-count">20s — OOH &amp; Digital</span>
+  </div>
+
+  <div class="video-full">
+    <video
+      src="250925 카카오_메인 20초_옥외, 디지털.mp4"
+      controls
+      preload="metadata"
+    ></video>
+    <div class="video-info">
+      <span class="v-title">카카오 메인 필름 20초</span>
+      <span class="v-sub">Cut-down · Outdoor · Digital Display</span>
+    </div>
+  </div>
+
+
+  <!-- STATEMENT -->
+  <div class="statement">
+    <p>
+      일상의 언어가<br>
+      <span class="dim">AI와 만날 때.</span>
+    </p>
+  </div>
+
+
+  <!-- SHORTFORM -->
+  <div class="section-label">
+    <span class="s-title">Shortform Series</span>
+    <span class="s-count">4 Films</span>
+  </div>
+
+  <div class="shortform-grid">
+
+    <div class="sf-item">
+      <video src="250925 카카오_숏폼03_친구탭피드_최종고화질.mp4" controls preload="metadata"></video>
+      <div class="sf-info">
+        <div class="sf-num">SF — 03</div>
+        <div class="sf-name">친구탭 피드</div>
+      </div>
+    </div>
+
+    <div class="sf-item">
+      <video src="250925 카카오_숏폼05_메시지삭제_최종고화질.mp4" controls preload="metadata"></video>
+      <div class="sf-info">
+        <div class="sf-num">SF — 05</div>
+        <div class="sf-name">메시지 삭제</div>
+      </div>
+    </div>
+
+    <div class="sf-item">
+      <video src="250925 카카오_숏폼08_공개범위_최종고화질.mp4" controls preload="metadata"></video>
+      <div class="sf-info">
+        <div class="sf-num">SF — 08</div>
+        <div class="sf-name">공개 범위</div>
+      </div>
+    </div>
+
+    <div class="sf-item">
+      <video src="250925 카카오_숏폼10_GPT_최종고화질.mp4" controls preload="metadata"></video>
+      <div class="sf-info">
+        <div class="sf-num">SF — 10</div>
+        <div class="sf-name">AI (GPT)</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- AI FILM -->
+  <div class="ai-section">
+    <div class="ai-header">
+      <h2>AI<br>Film</h2>
+      <div class="ai-desc">
+        <p>카카오 × GPT 통합을 담은 AI 메인 편. 역자막 대안 버전을 포함한 최종 검토본으로, 카카오가 AI와 함께 나아가는 방향을 담았습니다.</p>
+      </div>
+    </div>
+
+    <div class="video-full">
+      <video
+        src="250924 카카오_MAIN_GPT_역자막_alt_확인용.mp4"
+        controls
+        preload="metadata"
+      ></video>
+      <div class="video-info">
+        <span class="v-title">AI Film — GPT 역자막 Alt</span>
+        <span class="v-sub">Review Cut</span>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- CREDITS -->
+  <div class="credits">
+    <div class="credit-col">
+      <div class="c-label">Brand Strategy</div>
+      <ul>
+        <li>Brand Direction</li>
+        <li>Creative Strategy</li>
+        <li>Campaign Planning</li>
+        <li>AI Feature Positioning</li>
+      </ul>
+    </div>
+    <div class="credit-col">
+      <div class="c-label">Production</div>
+      <ul>
+        <li>Brand Film (30s / 20s)</li>
+        <li>AI Feature Film</li>
+        <li>Shortform Series ×4</li>
+        <li>Post Production</li>
+      </ul>
+    </div>
+    <div class="credit-col">
+      <div class="c-label">Distribution</div>
+      <ul>
+        <li>Out-of-Home (OOH)</li>
+        <li>Digital Display</li>
+        <li>Social Media</li>
+        <li>In-App</li>
+      </ul>
+    </div>
+  </div>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="f-left">Kakao Corp. — Brand Campaign 2025</span>
+    <span class="f-right">Portfolio ©2025</span>
+  </footer>
+
+</body>
+</html>
