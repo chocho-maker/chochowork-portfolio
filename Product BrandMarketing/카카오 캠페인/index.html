@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>카카오: 말 없이 연결되는 것들</title>
+<style>
+@font-face {
+  font-family: 'SFMono';
+  src: url('SFMonoLight.otf') format('opentype');
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'SFMono', 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #f6f6f4;
+  -webkit-font-smoothing: antialiased;
+}
+nav {
+  padding: 18px 40px;
+  background: #fff;
+  border-bottom: 1px solid #e2e2df;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+nav .n-l { font-weight: 600; }
+nav .n-r { color: #888; }
+.proj-row {
+  display: grid;
+  grid-template-columns: 200px 280px 1fr;
+  background: #fff;
+  border-bottom: 1px solid #e2e2df;
+  min-height: 400px;
+}
+.pc-title { padding: 40px; border-right: 1px solid #e2e2df; }
+.p-num { color: #888; margin-bottom: 8px; }
+.p-name { font-weight: 600; line-height: 1.4; }
+.pc-text { padding: 40px; border-right: 1px solid #e2e2df; }
+.meta { color: #888; margin-bottom: 24px; }
+.meta p { line-height: 1.9; }
+.lead { font-style: italic; margin-bottom: 16px; }
+.bd { margin-bottom: 24px; }
+.pc-media { padding: 40px; background: #f6f6f4; }
+.m-grid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 6px; }
+.m-item img, .m-item video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #ddd;
+}
+.m-item.wide { grid-column: 1 / -1; }
+.m-cap { margin-top: 8px; color: #888; }
+footer {
+  padding: 28px 40px;
+  display: flex;
+  justify-content: space-between;
+  color: #888;
+  background: #fff;
+  border-top: 1px solid #e2e2df;
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+  <span class="n-l">카카오: 말 없이 연결되는 것들</span>
+  <span class="n-r">Portfolio 2025</span>
+</nav>
+<div class="proj-row">
+  <div class="pc-title">
+    <div class="p-num">01</div>
+    <div class="p-name">카카오: 말 없이 연결되는 것들</div>
+  </div>
+  <div class="pc-text">
+    <div class="meta">
+      <p>카카오</p>
+      <p>Product Brand Film / Digital</p>
+      <p>2025</p>
+    </div>
+    <p class="lead">연결에 관한 이야기가 아니라, 연결되어 있다는 사실조차 잊게 만드는 것에 대한 이야기입니다.</p>
+    <p class="bd">가장 익숙한 브랜드는 설명을 요구하지 않습니다. 카카오의 언어는 말보다 먼저 도착하고, 대화가 끝난 자리에도 조용히 남습니다. 일상이 된 브랜드란, 더 이상 의식하지 않아도 되는 존재입니다.</p>
+  </div>
+  <div class="pc-media">
+    <div class="m-grid">
+        <div class="m-item wide">
+        <video src="250924 카카오_MAIN_GPT_역자막_alt_확인용.mp4" autoplay muted loop playsinline preload="metadata"></video>
+        <div class="m-cap">1<br>250924 카카오_MAIN_GPT_역자막_alt_확인용.mp4</div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <span>카카오: 말 없이 연결되는 것들</span>
+  <span>Portfolio 2025</span>
+</footer>
+</body>
+</html>
