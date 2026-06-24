@@ -8,6 +8,7 @@
     @font-face { font-family: 'SFMono'; src: url('SFMonoLight.otf') format('opentype'); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --bg:#f6f6f4; --white:#fff; --border:#e2e2df; --text:#1a1a1a; --mid:#888; --muted:#bbb; --f:'SFMono','Courier New',monospace; }
+    html { scroll-behavior:smooth; }
     html, body { font-family:var(--f); font-size:13px; line-height:1.6; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; }
     nav { position:sticky; top:0; z-index:50; background:var(--white); border-bottom:1px solid var(--border); padding:18px 40px; display:flex; justify-content:space-between; align-items:baseline; }
     nav .n-name { font-weight:600; }
@@ -22,7 +23,8 @@
     .ix-sh { margin-bottom:72px; }
     .ix-sh .roman { color:var(--mid); margin-bottom:8px; }
     .ix-sh .s-name { font-weight:600; }
-    .ix-entry { margin-bottom:22px; }
+    .ix-entry { margin-bottom:22px; display:block; text-decoration:none; color:inherit; transition:opacity 0.15s; }
+    .ix-entry:hover { opacity:0.5; }
     .ix-entry .e-n { font-weight:600; margin-bottom:2px; }
     .ix-entry .e-title { line-height:1.45; }
     .ix-entry .e-sub { color:var(--mid); }
@@ -107,26 +109,26 @@
         <div class="roman">I</div>
         <div class="s-name">Copywriting</div>
       </div>
-      <div class="ix-entry">
+      <a class="ix-entry" href="#project-1">
         <div class="e-n">1</div>
         <div class="e-title">K8</div>
         <div class="e-sub"></div>
-      </div>
-      <div class="ix-entry">
+      </a>
+      <a class="ix-entry" href="#project-2">
         <div class="e-n">2</div>
         <div class="e-title">아이오닉6 2026 Campaign</div>
         <div class="e-sub">Copywriting / Digital Campaign</div>
-      </div>
-      <div class="ix-entry">
+      </a>
+      <a class="ix-entry" href="#project-3">
         <div class="e-n">3</div>
         <div class="e-title">카카오페이지</div>
         <div class="e-sub"></div>
-      </div>
-      <div class="ix-entry">
+      </a>
+      <a class="ix-entry" href="#project-4">
         <div class="e-n">4</div>
         <div class="e-title">현대카드</div>
         <div class="e-sub"></div>
-      </div>
+      </a>
     </div>
 
     <div class="ix-section">
@@ -134,16 +136,16 @@
         <div class="roman">II</div>
         <div class="s-name">IP Brand marketing</div>
       </div>
-      <div class="ix-entry">
+      <a class="ix-entry" href="#project-5">
         <div class="e-n">5</div>
         <div class="e-title">공간브랜딩_강남구</div>
         <div class="e-sub"></div>
-      </div>
-      <div class="ix-entry">
+      </a>
+      <a class="ix-entry" href="#project-6">
         <div class="e-n">6</div>
         <div class="e-title">공간브랜딩_서울시</div>
         <div class="e-sub"></div>
-      </div>
+      </a>
     </div>
 
     <div class="ix-section">
@@ -151,16 +153,16 @@
         <div class="roman">III</div>
         <div class="s-name">Product BrandMarketing</div>
       </div>
-      <div class="ix-entry">
+      <a class="ix-entry" href="#project-7">
         <div class="e-n">7</div>
         <div class="e-title">쬬르디만들기</div>
         <div class="e-sub"></div>
-      </div>
-      <div class="ix-entry">
+      </a>
+      <a class="ix-entry" href="#project-8">
         <div class="e-n">8</div>
         <div class="e-title">카카오: Chat GPT for Kakao</div>
         <div class="e-sub">Product Brand Film / Digital</div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -173,7 +175,7 @@
   </div>
 </section>
 
-<section class="project">
+<section class="project" id="project-1">
   <div class="proj-row">
     <div class="pc-title">
       <div class="p-num">01</div>
@@ -197,7 +199,7 @@
   </div>
 </section>
 
-<section class="project">
+<section class="project" id="project-2">
   <div class="proj-row">
     <div class="pc-title">
       <div class="p-num">02</div>
@@ -224,7 +226,7 @@
   </div>
 </section>
 
-<section class="project">
+<section class="project" id="project-3">
   <div class="proj-row">
     <div class="pc-title">
       <div class="p-num">03</div>
@@ -248,7 +250,7 @@
   </div>
 </section>
 
-<section class="project">
+<section class="project" id="project-4">
   <div class="proj-row">
     <div class="pc-title">
       <div class="p-num">04</div>
@@ -279,7 +281,7 @@
   </div>
 </section>
 
-<section class="project">
+<section class="project" id="project-5">
   <div class="proj-row">
     <div class="pc-title">
       <div class="p-num">05</div>
@@ -303,7 +305,7 @@
   </div>
 </section>
 
-<section class="project">
+<section class="project" id="project-6">
   <div class="proj-row">
     <div class="pc-title">
       <div class="p-num">06</div>
@@ -334,7 +336,7 @@
   </div>
 </section>
 
-<section class="project">
+<section class="project" id="project-7">
   <div class="proj-row">
     <div class="pc-title">
       <div class="p-num">07</div>
@@ -358,7 +360,7 @@
   </div>
 </section>
 
-<section class="project">
+<section class="project" id="project-8">
   <div class="proj-row">
     <div class="pc-title">
       <div class="p-num">08</div>
