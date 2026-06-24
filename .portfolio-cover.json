@@ -1,7 +1,10 @@
 {
   "name": "chocho",
   "subtitle": "Freewriter",
-  "domain": "www.chochowork.com",
+  "links": [
+    "www.chochowork.com"
+  ],
   "year": "",
-  "music": "https://youtu.be/iXmo-OWMUaQ?si=e4cuFvdC2Dd_LSKC"
+  "music": "https://youtu.be/iXmo-OWMUaQ?si=e4cuFvdC2Dd_LSKC",
+  "domain": "www.chochowork.com"
 }
