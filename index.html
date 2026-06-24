@@ -12,7 +12,7 @@
     nav { position:sticky; top:0; z-index:50; background:var(--white); border-bottom:1px solid var(--border); padding:18px 40px; display:flex; justify-content:space-between; align-items:baseline; }
     nav .n-name { font-weight:600; }
     nav .n-right { color:var(--mid); }
-    .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; }
+    .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; min-height:calc(100vh - 58px); display:flex; flex-direction:column; justify-content:space-between; }
     .ix-layout { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; }
     .ix-name { padding-right:40px; }
     .ix-name .n-title { font-weight:600; }
@@ -54,9 +54,12 @@
       .pc-title,.pc-text { border-right:none; border-bottom:1px solid var(--border); }
       .ix-layout { grid-template-columns:1fr; gap:40px; }
     }
+      
   </style>
 </head>
 <body>
+
+
 
 <nav>
   <span class="n-name">chocho</span>
