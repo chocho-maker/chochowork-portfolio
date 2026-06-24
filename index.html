@@ -54,12 +54,12 @@
       .pc-title,.pc-text { border-right:none; border-bottom:1px solid var(--border); }
       .ix-layout { grid-template-columns:1fr; gap:40px; }
     }
-      
+      .yt-player{position:fixed;bottom:24px;right:24px;z-index:100;background:#fff;border:1px solid var(--border);border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(0,0,0,.1)}.yt-player iframe{display:block;width:240px;height:46px;border:none}.yt-toggle{position:absolute;top:4px;right:6px;background:none;border:none;cursor:pointer;font-size:12px;color:var(--mid)}
   </style>
 </head>
 <body>
 
-
+<div class="yt-player" id="yt-player"><iframe src="https://www.youtube.com/embed/iXmo-OWMUaQ?autoplay=1&loop=1&playlist=iXmo-OWMUaQ&controls=1&rel=0" allow="autoplay; encrypted-media" allowfullscreen></iframe><button class="yt-toggle" onclick="this.closest('#yt-player').style.display='none'">✕</button></div>
 
 <nav>
   <span class="n-name">chocho</span>
