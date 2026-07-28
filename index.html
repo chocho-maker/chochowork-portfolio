@@ -69,6 +69,13 @@
     #music-btn { background:none; border:none; cursor:pointer; font-size:10px; font-family:inherit; color:inherit; padding:0; line-height:1; }
     #music-btn:hover { color:var(--text); }
     
+    .modal-overlay { position:fixed; inset:0; background:rgba(26,26,26,0.4); display:flex; align-items:center; justify-content:center; z-index:300; opacity:0; pointer-events:none; transition:opacity 0.15s; padding:24px; }
+    .modal-overlay.open { opacity:1; pointer-events:auto; }
+    .modal-box { background:var(--white); border:1px solid var(--border); max-width:560px; width:100%; max-height:80vh; overflow-y:auto; padding:40px; position:relative; }
+    .modal-close { position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; font-size:18px; color:var(--mid); line-height:1; padding:4px; font-family:var(--f); }
+    .modal-close:hover { color:var(--text); }
+    .modal-title { font-weight:600; margin-bottom:16px; }
+    .modal-body { line-height:1.8; color:var(--text); }
   </style>
 </head>
 <body>
@@ -141,7 +148,7 @@
     <div class="ix-name">
       <div class="n-title">chocho</div>
       <div class="n-sub">Free-writer</div>
-      <div class="n-links"><a class="n-link" href="https://www.chochowork.com" target="_blank" rel="noopener">www.chochowork.com</a></div>
+      <div class="n-links"><a class="n-link" href="https://www.chochowork.com" target="_blank" rel="noopener">www.chochowork.com</a><a class="n-link" href="#" onclick="event.preventDefault();openExtraModal()">Something</a></div>
     </div>
 
     <div class="ix-section">
@@ -447,6 +454,18 @@
 </footer>
 
 
+<div id="extra-modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeExtraModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeExtraModal()">×</button>
+    <div class="modal-title">Something</div>
+    <div class="modal-body">안녕안녕</div>
+  </div>
+</div>
+<script>
+function openExtraModal(){document.getElementById('extra-modal-overlay').classList.add('open');}
+function closeExtraModal(){document.getElementById('extra-modal-overlay').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeExtraModal();});
+</script>
 
 </body>
 </html>
