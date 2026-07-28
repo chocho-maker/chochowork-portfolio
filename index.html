@@ -7,16 +7,15 @@
   <style>
     @font-face { font-family: 'SFMono'; src: url('SFMonoLight.otf') format('opentype'); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root { --bg:#f6f6f4; --white:#fff; --border:#e2e2df; --text:#1a1a1a; --mid:#888; --muted:#bbb; --f:'SFMono','Courier New',monospace; }
+    :root { --bg:#f6f6f4; --white:#fff; --border:#e2e2df; --text:#1a1a1a; --mid:#888; --muted:#bbb; --f:'SFMono','Courier New',monospace; --nav-h:58px; }
     html { scroll-behavior:smooth; scroll-snap-type:y mandatory; }
     html, body { font-family:var(--f); font-size:13px; line-height:1.6; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; font-synthesis:none; }
     nav { position:sticky; top:0; z-index:50; background:var(--white); border-bottom:1px solid var(--border); padding:18px 40px; display:flex; justify-content:space-between; align-items:baseline; }
     nav .n-name { font-weight:600; }
     nav .n-right { color:var(--mid); }
 
-    .cover-only { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px; min-height:calc(100vh - 58px); scroll-snap-align:start; }
-    .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; min-height:calc(100vh - 58px); scroll-snap-align:start; }
-    .ix-layout { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; }
+    .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; min-height:calc(100vh - var(--nav-h)); display:flex; flex-direction:column; justify-content:space-between; scroll-snap-align:start; }
+    .ix-layout { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; }
     .ix-name { padding-right:40px; }
     .ix-name .n-title { font-weight:600; }
     .ix-name .n-sub { font-style:italic; color:var(--mid); margin-bottom:20px; }
@@ -37,8 +36,8 @@
     .cat-section-inner { padding:20px 40px; display:flex; align-items:baseline; gap:16px; }
     .cat-roman { font-size:11px; color:var(--mid); }
     .cat-title { font-size:13px; font-weight:700; letter-spacing:0.04em; }
-    .project { background:var(--white); border-bottom:1px solid var(--border); scroll-margin-top:58px; scroll-snap-align:start; scroll-snap-stop:always; }
-    .proj-row { display:grid; grid-template-columns:200px 280px 1fr; min-height:calc(100vh - 58px); }
+    .project { background:var(--white); border-bottom:1px solid var(--border); scroll-margin-top:var(--nav-h); scroll-snap-align:start; scroll-snap-stop:always; }
+    .proj-row { display:grid; grid-template-columns:200px 280px 1fr; min-height:calc(100vh - var(--nav-h)); }
     .pc-title { padding:40px; border-right:1px solid var(--border); }
     .pc-title .p-num { color:var(--mid); margin-bottom:8px; }
     .pc-title .p-name { font-weight:600; }
@@ -61,7 +60,7 @@
       .pc-title,.pc-text { border-right:none; border-bottom:1px solid var(--border); }
       .pc-title,.pc-text,.pc-media { padding-left:20px; padding-right:20px; }
 
-      .cover-only,.index { padding-left:20px; padding-right:20px; }
+      .index { padding-left:20px; padding-right:20px; }
       .ix-layout { grid-template-columns:1fr; gap:40px; }
 
     }
@@ -83,6 +82,17 @@
   </div>
   <span class="n-right">Portfolio </span>
 </nav>
+
+<script>
+(function(){
+  var navEl=document.querySelector('nav');
+  function setNavH(){ if(navEl) document.documentElement.style.setProperty('--nav-h', navEl.offsetHeight+'px'); }
+  setNavH();
+  window.addEventListener('load',setNavH);
+  window.addEventListener('resize',setNavH);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(setNavH);
+})();
+</script>
 
 <script>
 (function(){
@@ -124,16 +134,14 @@
 </script>
 
 
-<section class="cover-only">
-  <div class="ix-name">
-    <div class="n-title">chocho</div>
-    <div class="n-sub">Freewriter</div>
-    <div class="n-links"><a class="n-link" href="https://www.chochowork.com" target="_blank" rel="noopener">www.chochowork.com</a></div>
-  </div>
-</section>
-
 <section class="index">
   <div class="ix-layout">
+    <div class="ix-name">
+      <div class="n-title">chocho</div>
+      <div class="n-sub">Freewriter</div>
+      <div class="n-links"><a class="n-link" href="https://www.chochowork.com" target="_blank" rel="noopener">www.chochowork.com</a></div>
+    </div>
+
     <div class="ix-section">
       <div class="ix-sh">
         <div class="roman">I</div>
