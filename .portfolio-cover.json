@@ -7,5 +7,9 @@
   "year": "",
   "music": "https://youtu.be/iXmo-OWMUaQ?si=e4cuFvdC2Dd_LSKC",
   "style": "plain",
+  "navLabel": "Portfolio",
+  "musicLabel": "BGM",
+  "extraLabel": "Something",
+  "extraText": "",
   "domain": "www.chochowork.com"
 }
