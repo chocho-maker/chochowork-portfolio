@@ -467,5 +467,67 @@ function closeExtraModal(){document.getElementById('extra-modal-overlay').classL
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeExtraModal();});
 </script>
 
+<script>
+(function(){
+  console.log('%cchocho', 'font-family:monospace;font-size:36px;font-weight:bold;color:#1a1a1a;');
+  console.log('%c여기까지 와주셔서 감사해요. 콘솔까지 열어보시는 분이라면, 분명 좋은 동료가 되어주실 것 같아요.', 'font-family:monospace;font-size:12px;color:#888;');
+
+  function eggToast(msg){
+    var el = document.createElement('div');
+    el.style.cssText = 'position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding:40px;text-align:center;background:rgba(246,246,244,0.96);color:var(--text,#1a1a1a);font-family:var(--f,monospace);font-size:15px;line-height:1.8;white-space:pre-line;opacity:0;transition:opacity 0.3s;pointer-events:none;';
+    el.textContent = msg;
+    document.body.appendChild(el);
+    requestAnimationFrame(function(){ el.style.opacity = '1'; });
+    setTimeout(function(){
+      el.style.opacity = '0';
+      setTimeout(function(){ el.remove(); }, 400);
+    }, 2400);
+  }
+
+  // Konami code
+  var konami = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  var konamiPos = 0;
+  document.addEventListener('keydown', function(e){
+    var key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+    if (key === konami[konamiPos]) {
+      konamiPos++;
+      if (konamiPos === konami.length) {
+        konamiPos = 0;
+        eggToast('🎮 코나미 커맨드 발견\n여기까지 오시다니, 진짜 팬이시네요.');
+      }
+    } else {
+      konamiPos = (key === konami[0]) ? 1 : 0;
+    }
+  });
+
+  // Click logo 7 times
+  var nameEl = document.querySelector('.n-name');
+  if (nameEl) {
+    var clickCount = 0, clickTimer = null;
+    nameEl.style.cursor = 'pointer';
+    nameEl.addEventListener('click', function(){
+      clickCount++;
+      clearTimeout(clickTimer);
+      clickTimer = setTimeout(function(){ clickCount = 0; }, 1200);
+      if (clickCount === 7) {
+        clickCount = 0;
+        eggToast('👀 chocho를 7번이나 클릭하셨네요.\n그만큼 궁금하셨다면, 위 링크로 연락주세요.');
+      }
+    });
+  }
+
+  // Type "chocho" anywhere
+  var typedBuffer = '';
+  document.addEventListener('keydown', function(e){
+    if (e.key.length !== 1) return;
+    typedBuffer = (typedBuffer + e.key.toLowerCase()).slice(-20);
+    if (typedBuffer.indexOf('chocho') !== -1) {
+      typedBuffer = '';
+      eggToast('✍️ 제 이름을 타이핑하셨네요.\n반가워요!');
+    }
+  });
+})();
+</script>
+
 </body>
 </html>
