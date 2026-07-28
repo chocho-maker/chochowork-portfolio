@@ -15,7 +15,7 @@
     nav .n-right { color:var(--mid); }
 
     .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; min-height:calc(100vh - var(--nav-h)); display:flex; flex-direction:column; justify-content:space-between; scroll-snap-align:start; }
-    .ix-layout { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; }
+    .ix-layout { display:grid; grid-template-columns:2fr repeat(4,1fr); }
     .ix-name { padding-right:40px; }
     .ix-name .n-title { font-weight:600; }
     .ix-name .n-sub { font-style:italic; color:var(--mid); margin-bottom:20px; }
@@ -71,6 +71,7 @@
   </style>
 </head>
 <body>
+<script>if('scrollRestoration' in history){history.scrollRestoration='manual';}window.scrollTo(0,0);</script>
 
 <div id="yt-target" style="position:fixed;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;bottom:0;right:0"></div>
 
@@ -88,9 +89,9 @@
   var navEl=document.querySelector('nav');
   function setNavH(){ if(navEl) document.documentElement.style.setProperty('--nav-h', navEl.offsetHeight+'px'); }
   setNavH();
-  window.addEventListener('load',setNavH);
+  window.addEventListener('load',function(){ setNavH(); window.scrollTo(0,0); });
   window.addEventListener('resize',setNavH);
-  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(setNavH);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(function(){ setNavH(); window.scrollTo(0,0); });
 })();
 </script>
 
@@ -200,6 +201,18 @@
         <div class="e-n">8</div>
         <div class="e-title">카카오: Chat GPT for Kakao</div>
         <div class="e-sub">Product Brand Film / Digital</div>
+      </a>
+    </div>
+
+    <div class="ix-section">
+      <div class="ix-sh">
+        <div class="roman">IV</div>
+        <div class="s-name">Writing</div>
+      </div>
+      <a class="ix-entry" href="#project-9">
+        <div class="e-n">9</div>
+        <div class="e-title">새 프로젝트</div>
+        <div class="e-sub"></div>
       </a>
     </div>
   </div>
@@ -420,6 +433,37 @@
           <video src="media/3_2_01.mp4" autoplay muted loop playsinline preload="metadata"></video>
           <div class="m-cap">1<br>250924 카카오_MAIN_GPT_역자막_alt_확인용.mp4</div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cat-section" id="cat-section-3">
+  <div class="cat-section-inner">
+    <span class="cat-roman">IV</span>
+    <span class="cat-title">Writing</span>
+  </div>
+</section>
+
+<section class="project" id="project-9">
+  <div class="proj-row">
+    <div class="pc-title">
+      <div class="p-num">09</div>
+      <div class="p-name">새 프로젝트</div>
+    </div>
+    <div class="pc-text">
+      <div class="meta">
+        
+        
+        <p>2025</p>
+      </div>
+      
+      
+      <span class="idx">009</span>
+    </div>
+    <div class="pc-media">
+      <div class="m-grid" style="grid-template-columns:repeat(2,1fr)">
+        <div class="ph">—</div>
       </div>
     </div>
   </div>
