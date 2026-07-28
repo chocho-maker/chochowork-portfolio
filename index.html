@@ -13,6 +13,7 @@
     nav { position:sticky; top:0; z-index:50; background:var(--white); border-bottom:1px solid var(--border); padding:18px 40px; display:flex; justify-content:space-between; align-items:baseline; }
     nav .n-name { font-weight:600; }
     nav .n-right { color:var(--mid); }
+
     .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; min-height:calc(100vh - 58px); display:flex; flex-direction:column; justify-content:space-between; scroll-snap-align:start; }
     .ix-layout { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; }
     .ix-name { padding-right:40px; }
@@ -27,9 +28,10 @@
     .ix-sh .s-name { font-weight:600; }
     .ix-entry { margin-bottom:22px; display:block; text-decoration:none; color:inherit; transition:opacity 0.15s; }
     .ix-entry:hover { opacity:0.5; }
+    .ix-entry .e-sub { color:var(--mid); }
+
     .ix-entry .e-n { font-weight:600; margin-bottom:2px; }
     .ix-entry .e-title { line-height:1.45; }
-    .ix-entry .e-sub { color:var(--mid); }
     .cat-section { background:var(--bg); border-top:2px solid var(--text); border-bottom:1px solid var(--border); }
     .cat-section-inner { padding:20px 40px; display:flex; align-items:baseline; gap:16px; }
     .cat-roman { font-size:11px; color:var(--mid); }
@@ -53,56 +55,73 @@
     .ph { aspect-ratio:4/3; background:#eeeeed; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:11px; text-transform:uppercase; letter-spacing:0.08em; }
     footer { padding:28px 40px; display:flex; justify-content:space-between; color:var(--mid); background:var(--white); border-top:1px solid var(--border); }
     @media (max-width:960px) {
-      nav,.index,.pc-title,.pc-text,.pc-media,footer { padding-left:20px; padding-right:20px; }
+      nav,footer { padding-left:20px; padding-right:20px; }
       .proj-row { grid-template-columns:1fr; }
       .pc-title,.pc-text { border-right:none; border-bottom:1px solid var(--border); }
+      .pc-title,.pc-text,.pc-media { padding-left:20px; padding-right:20px; }
+
+      .index { padding-left:20px; padding-right:20px; }
       .ix-layout { grid-template-columns:1fr; gap:40px; }
+
     }
       
-    #music-player { position:fixed; bottom:24px; right:24px; z-index:100; background:var(--white); border:1px solid var(--border); display:flex; align-items:center; gap:14px; padding:11px 16px; font-family:var(--f); font-size:11px; color:var(--mid); letter-spacing:0.07em; }
-    #music-btn { background:var(--text); color:#fff; border:none; cursor:pointer; width:22px; height:22px; display:flex; align-items:center; justify-content:center; font-size:10px; font-family:inherit; flex-shrink:0; padding:0; line-height:1; }
-    #music-btn:hover { background:#555; }
+    #music-player { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:8px; font-family:var(--f); font-size:11px; color:var(--mid); letter-spacing:0.07em; }
+    #music-btn { background:none; border:none; cursor:pointer; font-size:10px; font-family:inherit; color:inherit; padding:0; line-height:1; }
+    #music-btn:hover { color:var(--text); }
   </style>
 </head>
 <body>
 
-
 <div id="yt-target" style="position:fixed;width:0;height:0;overflow:hidden;opacity:0;pointer-events:none;bottom:0;right:0"></div>
-<div id="music-player">
-  <span>BGM</span>
-  <button id="music-btn" onclick="toggleMusic()">▶</button>
-</div>
+
+<nav>
+  <span class="n-name">chocho</span>
+  <div id="music-player">
+    <span>BGM</span>
+    <button id="music-btn" onclick="toggleMusic(event)">▶</button>
+  </div>
+  <span class="n-right">Portfolio </span>
+</nav>
+
 <script>
 (function(){
   var tag=document.createElement('script');tag.src='https://www.youtube.com/iframe_api';document.head.appendChild(tag);
-  var ytp;
+  var ytp, ready=false, pending=false;
   window.onYouTubeIframeAPIReady=function(){
-    ytp=new YT.Player('yt-target',{width:1,height:1,videoId:'iXmo-OWMUaQ',playerVars:{autoplay:1,loop:1,playlist:'iXmo-OWMUaQ',rel:0,mute:1},events:{
+    ytp=new YT.Player('yt-target',{width:1,height:1,videoId:'iXmo-OWMUaQ',playerVars:{autoplay:1,mute:1,loop:1,playlist:'iXmo-OWMUaQ',rel:0,playsinline:1},events:{
       onReady:function(e){
+        ready=true;
         e.target.playVideo();
+        if(pending){pending=false;ensurePlaying();}
         syncBtn();
       },
       onStateChange:syncBtn
     }});
   };
-  function unmuteOnFirstInteraction(){
-    if(ytp&&typeof ytp.unMute==='function'){
-      if(ytp.getPlayerState()!==1) ytp.playVideo();
-      ytp.unMute();ytp.setVolume(80);syncBtn();
-    }
-    ['click','touchstart','scroll','keydown'].forEach(function(ev){document.removeEventListener(ev,unmuteOnFirstInteraction);});
+  function ensurePlaying(){
+    if(!ready||!ytp){ pending=true; return; }
+    if(ytp.isMuted()) ytp.unMute();
+    ytp.setVolume(80);
+    ytp.playVideo();
+    syncBtn();
   }
-  ['click','touchstart','scroll','keydown'].forEach(function(ev){document.addEventListener(ev,unmuteOnFirstInteraction,{once:true,passive:true});});
-  window.toggleMusic=function(){if(!ytp||typeof ytp.getPlayerState!=='function')return;ytp.getPlayerState()===1?ytp.pauseVideo():ytp.playVideo();setTimeout(syncBtn,200);};
-  function syncBtn(){var b=document.getElementById('music-btn');if(!b||!ytp||typeof ytp.getPlayerState!=='function')return;b.textContent=ytp.getPlayerState()===1?'⏸':'▶';}
+  function firstInteraction(){
+    ensurePlaying();
+    ['click','touchstart','scroll','keydown'].forEach(function(ev){document.removeEventListener(ev,firstInteraction);});
+  }
+  ['click','touchstart','scroll','keydown'].forEach(function(ev){document.addEventListener(ev,firstInteraction,{once:true,passive:true});});
+  window.toggleMusic=function(e){
+    if(e) e.stopPropagation();
+    if(!ready||!ytp){ pending=true; return; }
+    if(ytp.getPlayerState()===1 && !ytp.isMuted()){ ytp.pauseVideo(); }
+    else { ensurePlaying(); }
+    setTimeout(syncBtn,150);
+  };
+  function syncBtn(){var b=document.getElementById('music-btn');if(!b||!ytp||typeof ytp.getPlayerState!=='function')return;b.textContent=(ytp.getPlayerState()===1&&!ytp.isMuted())?'⏸':'▶';}
   setInterval(syncBtn,1000);
 })();
 </script>
 
-<nav>
-  <span class="n-name">chocho</span>
-  <span class="n-right">Portfolio </span>
-</nav>
 
 <section class="index">
   <div class="ix-layout">
