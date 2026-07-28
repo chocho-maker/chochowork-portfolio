@@ -14,8 +14,9 @@
     nav .n-name { font-weight:600; }
     nav .n-right { color:var(--mid); }
 
-    .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; min-height:calc(100vh - 58px); display:flex; flex-direction:column; justify-content:space-between; scroll-snap-align:start; }
-    .ix-layout { display:grid; grid-template-columns:2fr 1fr 1fr 1fr; }
+    .cover-only { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px; min-height:calc(100vh - 58px); scroll-snap-align:start; }
+    .index { background:var(--white); border-bottom:1px solid var(--border); padding:56px 40px 72px; min-height:calc(100vh - 58px); scroll-snap-align:start; }
+    .ix-layout { display:grid; grid-template-columns:repeat(3,1fr); gap:40px; }
     .ix-name { padding-right:40px; }
     .ix-name .n-title { font-weight:600; }
     .ix-name .n-sub { font-style:italic; color:var(--mid); margin-bottom:20px; }
@@ -60,7 +61,7 @@
       .pc-title,.pc-text { border-right:none; border-bottom:1px solid var(--border); }
       .pc-title,.pc-text,.pc-media { padding-left:20px; padding-right:20px; }
 
-      .index { padding-left:20px; padding-right:20px; }
+      .cover-only,.index { padding-left:20px; padding-right:20px; }
       .ix-layout { grid-template-columns:1fr; gap:40px; }
 
     }
@@ -123,14 +124,16 @@
 </script>
 
 
+<section class="cover-only">
+  <div class="ix-name">
+    <div class="n-title">chocho</div>
+    <div class="n-sub">Freewriter</div>
+    <div class="n-links"><a class="n-link" href="https://www.chochowork.com" target="_blank" rel="noopener">www.chochowork.com</a></div>
+  </div>
+</section>
+
 <section class="index">
   <div class="ix-layout">
-    <div class="ix-name">
-      <div class="n-title">chocho</div>
-      <div class="n-sub">Freewriter</div>
-      <div class="n-links"><a class="n-link" href="https://www.chochowork.com" target="_blank" rel="noopener">www.chochowork.com</a></div>
-    </div>
-
     <div class="ix-section">
       <div class="ix-sh">
         <div class="roman">I</div>
