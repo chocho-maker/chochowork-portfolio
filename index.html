@@ -78,6 +78,11 @@
     .modal-refresh:hover { color:var(--text); }
     .modal-title { font-weight:600; margin-bottom:16px; }
     .modal-body { line-height:1.8; color:var(--text); white-space:pre-line; }
+    .modal-reply { display:flex; gap:8px; margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
+    .modal-reply input { flex:1; border:1px solid var(--border); border-radius:3px; padding:8px 10px; font-family:var(--f); font-size:12px; background:var(--bg); color:var(--text); outline:none; }
+    .modal-reply input:focus { border-color:var(--text); }
+    .modal-reply button { background:var(--text); color:#fff; border:none; border-radius:3px; padding:0 16px; font-family:var(--f); font-size:11px; cursor:pointer; }
+    .modal-reply button:hover { background:#444; }
   </style>
 </head>
 <body>
@@ -186,7 +191,7 @@
     <div class="ix-name">
       <div class="n-title">chocho</div>
       <div class="n-sub">Free-writer</div>
-      <div class="n-links"><a class="n-link" href="https://www.chochowork.com" target="_blank" rel="noopener">www.chochowork.com</a><a class="n-link" href="#" onclick="event.preventDefault();openExtraModal()">Something</a></div>
+      <div class="n-links"><a class="n-link" href="https://www.chochowork.com" target="_blank" rel="noopener">www.chochowork.com</a><a class="n-link" href="#" onclick="event.preventDefault();openExtraModal()">Something</a><a class="n-link" href="#" onclick="event.preventDefault();openChatModal()">Chat</a></div>
     </div>
 
     <div class="ix-section">
@@ -506,6 +511,10 @@
     <button class="modal-refresh" onclick="pickRandomExtraText()" title="다른 글귀 보기">⟳</button>
     <div class="modal-title">Something</div>
     <div class="modal-body" id="extra-modal-body"></div>
+    <div class="modal-reply">
+      <input type="text" id="extra-modal-input" placeholder="여기에 답장을 남겨보세요" maxlength="500" />
+      <button id="extra-modal-send-btn" onclick="sendExtraReply()">보내기</button>
+    </div>
   </div>
 </div>
 <script>
@@ -523,7 +532,88 @@ function openExtraModal(){
   document.getElementById('extra-modal-overlay').classList.add('open');
 }
 function closeExtraModal(){document.getElementById('extra-modal-overlay').classList.remove('open');}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeExtraModal();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeExtraModal();closeChatModal();}});
+</script>
+
+
+<div id="chat-modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeChatModal()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeChatModal()">×</button>
+    <button class="modal-refresh" onclick="loadChatBoard()" title="새로고침">⟳</button>
+    <div class="modal-title">Chat</div>
+    <div class="chat-board" id="chat-board"><div class="chat-empty">불러오는 중…</div></div>
+  </div>
+</div>
+<script>
+var CHAT_FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSfem9LaBf8EiMQWPj66AoXoPQpxOch6SeaY_5SKf8BSp-ElVw/formResponse";
+var CHAT_ENTRY_ID = "entry.1557738789";
+var CHAT_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTMEoM5XCgXm1LVblgQkdbolJsiKilnjIwActcQGh-C1cRKiW6XmWdgsJMCK7CZ_j2QkF-y5vza8Dq3/pub?output=csv";
+
+function parseCSV(text){
+  var rows = [], row = [], field = '', inQuotes = false;
+  for (var i = 0; i < text.length; i++) {
+    var c = text[i];
+    if (inQuotes) {
+      if (c === '"') { if (text[i+1] === '"') { field += '"'; i++; } else { inQuotes = false; } }
+      else { field += c; }
+    } else {
+      if (c === '"') { inQuotes = true; }
+      else if (c === ',') { row.push(field); field = ''; }
+      else if (c === '\n' || c === '\r') {
+        if (c === '\r' && text[i+1] === '\n') i++;
+        row.push(field); field = ''; rows.push(row); row = [];
+      } else { field += c; }
+    }
+  }
+  if (field.length || row.length) { row.push(field); rows.push(row); }
+  return rows;
+}
+
+function sendExtraReply(){
+  var input = document.getElementById('extra-modal-input');
+  var msg = input.value.trim();
+  if (!msg) return;
+  var btn = document.getElementById('extra-modal-send-btn');
+  if (btn) { btn.disabled = true; btn.textContent = '…'; }
+  var body = new URLSearchParams();
+  body.append(CHAT_ENTRY_ID, msg);
+  fetch(CHAT_FORM_ACTION, { method: 'POST', mode: 'no-cors', body: body })
+    .catch(function(){})
+    .then(function(){
+      input.value = '';
+      if (btn) { btn.textContent = '전달됨 ✓'; setTimeout(function(){ btn.textContent = '보내기'; btn.disabled = false; }, 1500); }
+    });
+}
+
+function loadChatBoard(){
+  var board = document.getElementById('chat-board');
+  board.innerHTML = '<div class="chat-empty">불러오는 중…</div>';
+  fetch(CHAT_CSV_URL, { cache: 'no-store' })
+    .then(function(r){ return r.text(); })
+    .then(function(text){
+      var rows = parseCSV(text).filter(function(r){ return r.length && r.some(function(c){ return c.trim(); }); });
+      rows.shift(); // header
+      rows.reverse(); // newest first
+      if (!rows.length) { board.innerHTML = '<div class="chat-empty">아직 남겨진 글이 없어요.</div>'; return; }
+      board.innerHTML = '';
+      rows.forEach(function(r){
+        var msg = r[r.length-1];
+        if (!msg || !msg.trim()) return;
+        var div = document.createElement('div');
+        div.className = 'chat-msg';
+        div.textContent = msg;
+        board.appendChild(div);
+      });
+    })
+    .catch(function(){ board.innerHTML = '<div class="chat-empty">불러오지 못했어요. 잠시 후 다시 시도해주세요.</div>'; });
+}
+
+function openChatModal(){
+  loadChatBoard();
+  document.getElementById('chat-modal-overlay').classList.add('open');
+}
+function closeChatModal(){document.getElementById('chat-modal-overlay').classList.remove('open');}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeChatModal();});
 </script>
 
 <script>
