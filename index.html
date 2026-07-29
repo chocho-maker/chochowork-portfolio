@@ -8,7 +8,7 @@
     @font-face { font-family: 'SFMono'; src: url('SFMonoLight.otf') format('opentype'); }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root { --bg:#f6f6f4; --white:#fff; --border:#e2e2df; --text:#1a1a1a; --mid:#888; --muted:#bbb; --f:'SFMono','Courier New',monospace; --nav-h:58px; --cat-h:60px; }
-    html { scroll-behavior:smooth; scroll-snap-type:y mandatory; }
+    html { scroll-behavior:smooth; scroll-snap-type:y proximity; }
     html, body { font-family:var(--f); font-size:13px; line-height:1.6; color:var(--text); background:var(--bg); -webkit-font-smoothing:antialiased; font-synthesis:none; }
     nav { position:sticky; top:0; z-index:50; background:var(--white); border-bottom:1px solid var(--border); padding:18px 40px; display:flex; justify-content:space-between; align-items:baseline; }
     nav .n-name { font-weight:600; }
@@ -36,7 +36,7 @@
     .cat-section-inner { padding:20px 40px; display:flex; align-items:baseline; gap:16px; }
     .cat-roman { font-size:11px; color:var(--mid); }
     .cat-title { font-size:13px; font-weight:700; letter-spacing:0.04em; }
-    .project { background:var(--white); border-bottom:1px solid var(--border); scroll-margin-top:calc(var(--nav-h) + var(--cat-h)); scroll-snap-align:start; scroll-snap-stop:always; }
+    .project { background:var(--white); border-bottom:1px solid var(--border); scroll-margin-top:calc(var(--nav-h) + var(--cat-h)); scroll-snap-align:start; }
     .proj-row { display:grid; grid-template-columns:200px 280px 1fr; min-height:calc(100vh - var(--nav-h) - var(--cat-h)); margin-top:var(--cat-h); }
     .pc-title { padding:40px; border-right:1px solid var(--border); }
     .pc-title .p-num { color:var(--mid); margin-bottom:8px; }
@@ -110,16 +110,35 @@
 (function(){
   function getPages(){ return Array.prototype.slice.call(document.querySelectorAll('.index, .project')); }
   function pageTop(el){ return el.getBoundingClientRect().top + window.scrollY; }
+  function pageScrollTarget(el){
+    var margin = parseFloat(getComputedStyle(el).scrollMarginTop) || 0;
+    return pageTop(el) - margin;
+  }
   function currentPageIndex(pages){
     var y = window.scrollY + 10;
     var idx = 0;
     for (var i = 0; i < pages.length; i++) { if (pageTop(pages[i]) <= y) idx = i; }
     return idx;
   }
+  function easeInOutCubic(t){ return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
+  var scrollAnim = null;
+  function smoothScrollTo(targetY, duration){
+    if (scrollAnim) cancelAnimationFrame(scrollAnim);
+    var startY = window.scrollY;
+    var diff = targetY - startY;
+    var startTime = null;
+    function step(ts){
+      if (!startTime) startTime = ts;
+      var progress = Math.min((ts - startTime) / duration, 1);
+      window.scrollTo({ top: startY + diff * easeInOutCubic(progress), left: 0, behavior: 'auto' });
+      if (progress < 1) scrollAnim = requestAnimationFrame(step);
+    }
+    scrollAnim = requestAnimationFrame(step);
+  }
   function goToPage(idx){
     var pages = getPages();
     if (idx < 0 || idx >= pages.length) return;
-    pages[idx].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    smoothScrollTo(pageScrollTarget(pages[idx]), 700);
   }
   document.addEventListener('keydown', function(e){
     var tag = (document.activeElement && document.activeElement.tagName || '').toLowerCase();
