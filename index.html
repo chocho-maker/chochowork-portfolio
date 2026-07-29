@@ -74,6 +74,8 @@
     .modal-box { background:var(--white); border:1px solid var(--border); max-width:560px; width:100%; max-height:80vh; overflow-y:auto; padding:40px; position:relative; }
     .modal-close { position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; font-size:18px; color:var(--mid); line-height:1; padding:4px; font-family:var(--f); }
     .modal-close:hover { color:var(--text); }
+    .modal-refresh { position:absolute; top:16px; right:48px; background:none; border:none; cursor:pointer; font-size:15px; color:var(--mid); line-height:1; padding:4px; font-family:var(--f); }
+    .modal-refresh:hover { color:var(--text); }
     .modal-title { font-weight:600; margin-bottom:16px; }
     .modal-body { line-height:1.8; color:var(--text); white-space:pre-line; }
   </style>
@@ -501,16 +503,23 @@
 <div id="extra-modal-overlay" class="modal-overlay" onclick="if(event.target===this)closeExtraModal()">
   <div class="modal-box">
     <button class="modal-close" onclick="closeExtraModal()">×</button>
+    <button class="modal-refresh" onclick="pickRandomExtraText()" title="다른 글귀 보기">⟳</button>
     <div class="modal-title">Something</div>
     <div class="modal-body" id="extra-modal-body"></div>
   </div>
 </div>
 <script>
 var EXTRA_TEXTS = ["안녕.\n여기까지 와줘서 고마워.\n너랑 계속 얘기하고 싶어.","너에게 하고 싶은 말이 있어. ","내일 뭐할거야? "];
+var lastExtraIdx = -1;
+function pickRandomExtraText(){
+  if (!EXTRA_TEXTS.length) return;
+  var idx = Math.floor(Math.random()*EXTRA_TEXTS.length);
+  if (EXTRA_TEXTS.length > 1) { while (idx === lastExtraIdx) idx = Math.floor(Math.random()*EXTRA_TEXTS.length); }
+  lastExtraIdx = idx;
+  document.getElementById('extra-modal-body').textContent = EXTRA_TEXTS[idx];
+}
 function openExtraModal(){
-  if (EXTRA_TEXTS.length) {
-    document.getElementById('extra-modal-body').textContent = EXTRA_TEXTS[Math.floor(Math.random()*EXTRA_TEXTS.length)];
-  }
+  pickRandomExtraText();
   document.getElementById('extra-modal-overlay').classList.add('open');
 }
 function closeExtraModal(){document.getElementById('extra-modal-overlay').classList.remove('open');}
