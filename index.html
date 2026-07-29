@@ -75,7 +75,7 @@
     .modal-close { position:absolute; top:16px; right:16px; background:none; border:none; cursor:pointer; font-size:18px; color:var(--mid); line-height:1; padding:4px; font-family:var(--f); }
     .modal-close:hover { color:var(--text); }
     .modal-title { font-weight:600; margin-bottom:16px; }
-    .modal-body { line-height:1.8; color:var(--text); }
+    .modal-body { line-height:1.8; color:var(--text); white-space:pre-line; }
   </style>
 </head>
 <body>
@@ -502,11 +502,17 @@
   <div class="modal-box">
     <button class="modal-close" onclick="closeExtraModal()">×</button>
     <div class="modal-title">Something</div>
-    <div class="modal-body">안녕 <br>여기까지 와줘서 고마워. <br>너랑 계속 얘기하고 싶어. </div>
+    <div class="modal-body" id="extra-modal-body"></div>
   </div>
 </div>
 <script>
-function openExtraModal(){document.getElementById('extra-modal-overlay').classList.add('open');}
+var EXTRA_TEXTS = ["안녕.\n여기까지 와줘서 고마워.\n너랑 계속 얘기하고 싶어.","너에게 하고 싶은 말이 있어. ","내일 뭐할거야? "];
+function openExtraModal(){
+  if (EXTRA_TEXTS.length) {
+    document.getElementById('extra-modal-body').textContent = EXTRA_TEXTS[Math.floor(Math.random()*EXTRA_TEXTS.length)];
+  }
+  document.getElementById('extra-modal-overlay').classList.add('open');
+}
 function closeExtraModal(){document.getElementById('extra-modal-overlay').classList.remove('open');}
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeExtraModal();});
 </script>
